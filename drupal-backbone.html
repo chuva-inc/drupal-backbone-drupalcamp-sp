@@ -1,0 +1,473 @@
+<!doctype html>
+
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Aplicações em JavaScript com Drupal usando Backbone.js e Twig - por Danillo Nunes</title>
+    
+    <meta name="description" content="Saiba como você pode as mais novas e interessantes bibliotecas em JavaScript para construir projetos de interações poderosas e eficientes hoje, ao mesmo tempo em que já se prepara para o futuro do Drupal." />
+    <meta name="author" content="Danillo Nunes" />
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+
+    <!-- Highlight.js -->
+    <link rel="stylesheet" href="highlight.js/styles/ir_black.css">
+    <script src="highlight.js/highlight.pack.js"></script>
+
+    <!-- Estilos importados do impress.js. -->
+    <link href="drupal-backbone-impress.css" rel="stylesheet" />
+
+    <!-- Estilos importados do bootstrap. -->
+    <link href="drupal-backbone-bootstrap.css" rel="stylesheet" />
+
+    <!-- Estilos próprios desta apresentação. -->
+    <link href="drupal-backbone.css" rel="stylesheet" />
+</head>
+
+<body class="impress-not-supported">
+
+<div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+
+<div id="impress">
+
+    <div id="titulo" class="step slide">
+      <div class="middle-title center">
+        <h1>Aplicações em JavaScript
+          <br/>com Drupal
+          <br/>usando Backbone.js
+          <br/>e Twig</h1>
+      </div>
+    </div>
+
+    <div id="apresentacao" class="step slide">
+      <h2>Apresentação</h2>
+
+      <ul>
+        <li><strong>Danillo Nunes</strong>, 23 anos</li>
+        <li>Desenvolvedor Web na <strong class="icon chuva">Chuva Inc.</strong></li>
+        <li>Drupaleiro há 4 anos</li>
+        <li>Participação na comunidade Drupal:
+          <ul>
+            <li>Mantenedor de diversos módulos contrib</li>
+            <li>Co-Administrador da tradução para Português do Brasil</li>
+            <li>Co-Gerente da lista Drupal-BR</li>
+            <li>Programador e revisor de patches do core</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div id="introducao" class="step slide">
+      <div class="middle-title center">
+        <h2>Introdução</h2>
+      </div>
+    </div>
+
+    <div id="aplicacoes-js" class="step slide">
+      <h2>Aplicações em JavaScript</h2>
+
+      <ul>
+        <li>O Jeito Certo™ de construir Aplicações Web</li>
+        <li>Experiência de uso mais fluida</li>
+        <li>Processamento de front-end no lado do cliente</li>
+        <li>Requisições HTTP somente quando necessário</li>
+      </ul>
+    </div>
+
+    <div id="com-drupal" class="step slide">
+      <h2>...Com Drupal</h2>
+
+      <ul>
+        <li>O melhor sistema de gerenciamento de conteúdo</li>
+        <li>Infra-estrutura e armazenamento de informações</li>
+        <li>Abertura de dados através de web services</li>
+      </ul>
+    </div>
+
+    <div id="usando-backbone" class="step slide">
+      <h2>...Usando Backbone.js</h2>
+
+      <br/>
+
+      <p class="center">
+      <img src="img/backbone.png" width="500px"/>
+      </p>
+
+      <br/>
+      <br/>
+
+      <ul>
+        <li>Integração de estrutura de dados no lado do cliente</li>
+        <li>Integração com API através de web services</li>
+        <li>Desenvolvimento baseado em eventos</li>
+      </ul>
+    </div>
+
+    <div id="js-drupal-problemas" class="step slide">
+      <div class="middle-title center">
+        <h2>JavaScript e Drupal: Problemas comuns</h2>
+      </div>
+    </div>
+
+    <div id="js-ecossistema" class="step slide">
+      <h2>JavaScript: Tópico a parte</h2>
+
+      <ul>
+        <li>Linguagem independente <em><small>(para geeks de ciência da computação:
+          <br/>Linguagem Turing Completa)</small></em></li>
+        <li>Sintaxe e semântica próprias</li>
+        <li>Ecossistema próprio</li>
+      </ul>
+
+      <p class="center fadeout img-spacing">
+        <img src="img/jquery.png" width="250px"/>
+        <br/>
+        <img src="img/underscore.png" width="200px"/>
+        <img src="img/nodejs.png" width="200px"/>
+        <br/>
+        <img src="img/angularjs.png" width="200px"/>
+        <img src="img/backbone.png" width="200px"/>
+        <br/>
+        <img src="img/raphael.png" width="80px" style="margin: 0 80px !important"/>
+        <img src="img/require.png" width="120px" style="margin: 0 60px !important"/>
+      </p>
+    </div>
+
+    <div id="js-behaviors" class="step slide">
+      <h2>Design pattern: One behavior to rule them all</h2>
+
+      <strong>JavaScript</strong>
+      <pre><code class="language-javascript">Drupal.behaviors.<em>nome_do_projeto</em> = {
+  attach: function() {
+    <img src="img/do-all-the-things.jpg" width="320px" height="240px">
+  }
+};</code></pre>
+    </div>
+
+    <div id="js-oo" class="step slide">
+      <h2>Orientação a Objetos: Clássica vs Protótipca</h2>
+
+      <ul>
+        <li>JavaScript não tem classe</li>
+        <li>Objetos são protótipos; Protótipos são objetos</li>
+        <li>Não é Orientação a Objetos <em>errada</em>, é só <em>diferente</em></li>
+        <li>É possível simular orientação a objetos clássica com JavaScript</li>
+      </ul>
+    </div>
+
+    <div id="js-eventos" class="step slide">
+      <h2>Eventos: Você está fazendo isso errado</h2>
+
+      <ul>
+        <li>A ação não pertence a quem está a invocando</li>
+        <li>E sim a quem está <strong>agindo</strong></li>
+        <li>Eventos personalizados podem ser usados como métodos de objetos</li>
+      </ul>
+    </div>
+
+    <div id="js-tarefas" class="step slide">
+      <h2>Exemplo: Tarefas <a target="_blank" href="http://jsfiddle.net/CHYJB/">#</a></h2>
+
+      <strong>HTML</strong>
+<pre><code class="language-html">&lt;ul id="lista"&gt;&lt;/ul&gt;
+&lt;input type="text" id="texto" /&gt;
+&lt;input type="button" id="nova" value="Nova tarefa" /&gt;</code></pre>
+
+      <br/>
+
+      <strong>JavaScript</strong>
+<pre><code class="language-javascript">$("#nova").click(function() {
+  $("#lista").append("&lt;li&gt;" + $("#texto").val() + "&lt;/li&gt;");
+});</code></pre>
+    </div>
+
+    <div id="js-tarefas-eventos" class="step slide">
+      <h2>Usando eventos personalizados <a target="_blank" href="http://jsfiddle.net/SbHRz/">#</a></h2>
+
+      <strong>JavaScript</strong>
+<pre><code class="language-javascript">$("#lista").bind("adicionar", function(event, texto) {
+  $(this).append("&lt;li&gt;" + texto + "&lt;/li&gt;");
+});
+
+$("#nova").click(function() {
+  $("#lista").trigger("adicionar", [$("#texto").val()]);
+});</code></pre>
+    </div>
+
+    <div id="backbone-introducao" class="step slide">
+      <div class="middle-title center">
+        <h2>Backbone.js</h2>
+      </div>
+    </div>
+
+    <div id="backbone-mvc" class="step slide">
+      <h2>Model-View-Controller</h2>
+
+      <p class="center">
+        <img src="img/mamilos.jpg" />
+        <br/>
+        <em>MVCs são muito polêmicos!</em>
+      </p>
+    </div>
+
+    <div id="backbone-recursos" class="step slide">
+      <h2>Principais recursos</h2>
+
+      <ul>
+        <li>Models, Views, Collections, Routers</li>
+        <li>Orientação a objetos clássica
+          <ul>
+            <li>Herança</li>
+            <li>Construtores</li>
+            <li>Getters/Setters</li>
+          </ul>
+        </li>
+        <li>Eventos personalizados
+          <ul>
+            <li>Iguais aos do jQuery, mas para qualquer objeto</li>
+          </ul>
+        </li>
+        <li>Routers
+          <ul>
+            <li>Interface entre Models do cliente e dados do servidor</li>
+            <li>Comunicação via interface REST</li>
+          </ul>
+      </ul>
+    </div>
+
+    <div id="backbone-tarefas" class="step slide">
+      <h2>Tarefas em Backbone</h2>
+
+      <strong>JavaScript</strong>
+<pre><code class="language-javascript">var Tarefa = Backbone.Model.extend({
+  defaults: {
+    texto: "Texto padrão"
+  }
+});
+var TarefaExemplo = new Tarefa();
+
+var Lista = Backbone.Collection.extend({
+  model: Tarefa
+});
+var ListaPrincipal = new Lista();</code></pre>
+    </div>
+
+    <div id="backbone-tarefas-acao" class="step slide">
+      <h2>A ação está toda nos Models e Collections <a target="_blank" href="http://jsfiddle.net/M6mA8/">#</a></h2>
+
+      <strong>JavaScript</strong>
+<pre><code class="language-javascript">$("#nova").click(function() {
+  ListaPrincipal.add({
+    texto: $("#texto").val()
+  });
+});</code></pre>
+    </div>
+
+    <div id="backbone-tarefas-views" class="step slide">
+      <h2>O HTML vem dos Views</h2>
+
+      <strong>JavaScript</strong>
+<pre><code class="language-javascript">var TarefaView = Backbone.View.extend({
+  tagName: "li",
+  render: function() {
+    var texto = this.model.get("texto");
+    this.$el.text(texto);
+    return this;
+  }
+});</code></pre>
+    </div>
+
+    <div id="backbone-tarefas-views-lista" class="step slide">
+      <strong>JavaScript</strong>
+<pre><code class="language-javascript">var ListaView = Backbone.View.extend({
+  el: $("#lista"),
+  render: function() {
+    var $lista = this.$el;
+    $lista.empty();
+    ListaPrincipal.each(function(tarefa) {
+      var view = new TarefaView({
+        model: tarefa
+      }).render();
+
+      $lista.append(view.$el);
+    });
+  }
+});
+
+var ListaHTML = new ListaView;</code></pre>
+    </div>
+
+    <div id="backbone-tarefas-views-eventos" class="step slide">
+      <h2>Renderizando a partir de eventos <a target="_blank" href="http://jsfiddle.net/yqZfd/">#</a></h2>
+
+      <strong>JavaScript</strong>
+<pre><code class="language-javascript">var ListaView = Backbone.View.extend({
+[...],
+  initialize: function() {
+    this.listenTo(ListaPrincipal, "add", this.render);
+  }
+});</code></pre>
+    </div>
+
+    <div id="backbone-drupal" class="step slide">
+      <h2>Relacionando Backbone e Drupal</h2>
+
+      <ul>
+        <li><span class="icon backbone">Models</span> → <span class="icon drupal">Entities (Nodes)</span></li>
+        <li><span class="icon backbone">Views</span> → <span class="icon drupal">Templates</span></li>
+        <li><span class="icon backbone">Collections</span> → <span class="icon drupal">Views</span></li>
+        <li><span class="icon backbone">Routers</span> → <span class="icon drupal">Paths</span></li>
+      </ul>
+    </div>
+
+    <div id="backbone-tarefas-drupal" class="step slide">
+      <h2>Drupal + Backbone + RestWS</h2>
+
+      <strong>JavaScript</strong>
+<pre><code class="language-javascript">var Tarefa = Drupal.Backbone.Models.Node.extend({
+  defaults: {
+    texto: "Texto padrão"
+  }
+});
+var TarefaExemplo = new Tarefa();
+
+var Lista = Backbone.Collection.extend({
+  model: Tarefa
+});
+var ListaPrincipal = new Lista();</code></pre>
+    </div>
+
+    <div id="one-more-thing" class="step slide">
+      <div class="middle-title center">
+        <h2>One more thing...</h2>
+      </div>
+    </div>
+
+    <div id="twig" class="step slide">
+      <h2>Twig.js</h2>
+
+      <ul>
+        <li><strong>Twig</strong>: Sistema de template em PHP com sintaxe simples</li>
+        <li><strong>Twig.js</strong>: Versão não-oficial portada para JavaScript</li>
+      </ul>
+
+      <br/>
+
+      <strong>Twig</strong>
+<pre><code class="language-twig">&lt;a href="{{ url }}"&gt;{{ titulo }}&lt;/a&gt;</code></pre>
+    </div>
+
+    <div id="twig-template" class="step slide">
+      <h2>Template com Twig.js</h2>
+
+      <strong>JavaScript</strong>
+<pre><code class="language-javascript">var TarefaTemplate = twig({
+  data: "{{ texto }}"
+});
+
+var ListaTemplate = twig({
+  data: "{% for tarefa in tarefas %}\
+{{ tarefa }}\
+{% endfor %}"
+});</code></pre>
+    </div>
+
+    <div id="twig-backbone" class="step slide">
+      <h2>Template no Backbone</h2>
+
+      <strong>JavaScript</strong>
+<pre><code class="language-javascript">var TarefaView = Backbone.View.extend({
+  template: TarefaTemplate,
+  render: function() {
+    var dados = this.model.attributes;
+    this.$el.html(this.template.render(dados));
+    return this;
+  }
+});</code></pre>
+    </div>
+
+    <div id="twig-backbone-lista" class="step slide">
+      <strong>JavaScript</strong>
+<pre><code class="language-javascript">var ListaView = Backbone.View.extend({
+  template: ListaTemplate,
+  render: function() {
+    var $lista = this.$el;
+    $lista.empty();
+    ListaPrincipal.each(function(tarefa) {
+      var view = new TarefaView({
+        model: tarefa
+      }).render();
+
+      $lista.append(view.$el);
+    });
+  }
+});</code></pre>
+    </div>
+
+    <div id="drupal-8" class="step slide">
+      <h2>Drupal 8</h2>
+
+      <ul>
+        <li>Backbone.js integrado!</li>
+        <li>Twig integrado!</li>
+        <li>Integração entre templates de back-end (Twig) e front-end (Twig.js)</li>
+      </ul>
+    </div>
+
+    <div id="duvidas" class="step slide">
+      <h2>Dúvidas?</h2>
+
+      <ul>
+        <li>Pergunte aqui! o/</li>
+        <li>Lista JavaScript: <a target="_blank" href="mailto:jspro@googlegroups.com">jspro@googlegroups.com</a></li>
+        <li>Lista Drupal: <a target="_blank" href="mailto:drupal-br@googlegroups.com">drupal-br@googlegroups.com</a></li>
+        <li>Consultoria profissional: <a target="_blank" href="http://chuva-inc.com.br">chuva-inc.com.br</a></li>
+      </ul>
+
+      <hr/>
+
+      <p class="center">
+        Assine nosso blog para baixar esta apresentação:
+        <br/><big><a class="icon feed" href="http://chuva-inc.com.br/rss.xml">chuva-inc.com.br/rss.xml</a></big>
+        <br/><small>(Aproveite enquanto temos Google Reader! :P)</small>
+      </p>
+
+      <hr/>
+
+      <p class="center">
+        <big>Obrigado!</big>
+      </p>
+    </div>
+
+</div>
+
+<div class="hint">
+    <p>Use a spacebar or arrow keys to navigate</p>
+</div>
+<script>
+if ("ontouchstart" in document.documentElement) { 
+    document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+}
+</script>
+
+<script src="jquery.js"></script>
+<script src="impress.js/js/impress.js"></script>
+<script>
+var x = 0;
+jQuery('.step').each(function() {
+  x = x + 1000;
+  $(this).attr('data-x', x);
+});
+
+impress().init();
+
+hljs.initHighlightingOnLoad();
+</script>
+
+</body>
+</html>
